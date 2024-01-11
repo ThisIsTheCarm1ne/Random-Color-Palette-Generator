@@ -1,9 +1,3 @@
-<svelte:head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Genos&display=swap" rel="stylesheet"> 
-</svelte:head>
-
 <script lang="ts">
   import { onMount } from 'svelte';
   import ColorModesDropdown from './lib/ColorModesDropdown.svelte';
@@ -69,6 +63,9 @@
       </div>
     {/each}
   </div>
+  <div class="hint">
+    <p>Press &ltspacebar&gt to randomly generate color palette</p>
+  </div>
 </main>
 
 <style>
@@ -86,6 +83,23 @@
   .color_code {
     height: min-content;
     font-size: 2.5em;
-    font-family: 'Heebo', sans-serif;
+  }
+  .hint {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2em;
+    background-color: #D1D1D195;
+    border: 2px black solid;
+    border-radius: 11px;
+    margin-left: auto; 
+    margin-right: auto; 
+    font-size: 1.25em;
+    text-align: center;
+    padding: 1em;
+    width: 35%;
+  }
+  .hint > p {
+    margin: 0;
   }
 </style>
