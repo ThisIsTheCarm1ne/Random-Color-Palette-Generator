@@ -1,3 +1,3 @@
 import { writable } from "svelte/store";
 
-export const mode = writable('complementary');
+export const mode = writable('auto');

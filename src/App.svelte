@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import ColorModesDropdown from './lib/ColorModesDropdown.svelte';
   import { mode } from "./lib/store.ts";
+  import chroma from 'chroma-js';
 
   let colorHarmonyMode: string;
   mode.subscribe((value: string) => {
@@ -24,7 +25,39 @@
   }
 
   function updateColors() {
-    colors = colors.map(() => getRandomColor());
+    colors = generateColorPalette(colorHarmonyMode);
+  }
+
+
+  function generateColorPalette(mode: string): string[] {
+    const baseColor = getRandomColor();
+    let palette: string[];
+
+    switch (mode) {
+      case 'complementary':
+        palette = chroma.scale([baseColor, chroma(baseColor).saturate(2).hex()]).colors(colors.length);
+        break;
+      case 'triad':
+        palette = chroma.scale([
+          baseColor,
+          chroma(baseColor).saturate(2).set('hsl.h', '+120').hex(),
+          chroma(baseColor).saturate(2).set('hsl.h', '-120').hex()
+        ]).colors(colors.length);
+        break;
+      case 'square':
+        palette = chroma.scale([
+          baseColor,
+          chroma(baseColor).saturate(2).set('hsl.h', '+90').hex(),
+          chroma(baseColor).saturate(2).set('hsl.h', '+180').hex(),
+          chroma(baseColor).saturate(2).set('hsl.h', '-90').hex()
+        ]).colors(colors.length);
+        break;
+      default:
+        palette = colors.map(() => getRandomColor());
+        break;
+    }
+
+    return palette;
   }
 
   function getRandomColor() {
