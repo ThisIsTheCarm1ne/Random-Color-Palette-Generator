@@ -3,3 +3,7 @@ body {
   padding: 0;
   font-family: 'Heebo', sans-serif;
 }
+a {
+  color: inherit;
+  font-weight: 600;
+}

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import ColorModesDropdown from './lib/ColorModesDropdown.svelte';
+  import AboutAuthor from './lib/AboutAuthor.svelte';
   import { mode } from "./lib/store.ts";
   import chroma from 'chroma-js';
 
@@ -87,6 +88,7 @@
 </script>
 
 <main>
+  <AboutAuthor />
   <ColorModesDropdown />
 
   <div class="color_stripes">
@@ -134,5 +136,17 @@
   }
   .hint > p {
     margin: 0;
+  }
+  @media only screen and (max-width: 720px) {
+    .color_stripes {
+      flex-direction: column;
+    }
+    .stripe {
+      height: min-content;
+    }
+    .hint {
+      width: 80%;
+      bottom: 1em;
+    }
   }
 </style>
